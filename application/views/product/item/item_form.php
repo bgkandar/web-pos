@@ -11,6 +11,7 @@
 
 <!-- Main content -->
 <section class="content">
+<?php $this->view('message'); ?>
 	<div class="box">
 		<div class="box-header">
 			<h3 class="box-title"><?= ucfirst($page); ?> items</h3>
@@ -22,7 +23,7 @@
 		<div class="box-body">
             <div class="row">
                 <div class="col-md-4 col-md-offset-4">
-                    <form action="<?= site_url('item/process')?>" method="post">
+                    <?= form_open_multipart('item/process')?>
                         <div class="form-group">
                             <label for="">Barcode *</label>
                             <input type="hidden" name="id" value="<?= $row->item_id; ?>">
@@ -34,7 +35,7 @@
                         </div> 
                         <div class="form-group">
                             <label for="">Category *</label>
-                            <select name="category" class="form-control">
+                            <select name="category" class="form-control" required>
                                 <option value="">- Pilih -</option>
                                 <?php foreach($category->result() as $key => $data) { ?>
                                     <option value="<?= $data->category_id?>" <?= $data->category_id == $row->category_id ? "selected" : null?>><?= $data->name?></option>
@@ -51,10 +52,23 @@
                             <input type="number" name="harga" value="<?= $row->harga; ?>" class="form-control" required>
                         </div> 
                         <div class="form-group">
+                            <label for="">Image</label>
+                            <?php if ($page == 'edit') {
+                                if($row->image != null) { ?>
+                                    <div style="margin-bottom:4px;">
+                                        <img src="<?= base_url('uploads/product/'.$row->image)?>" style="width:100%">
+                                    </div>
+                            <?php }
+                                }
+                            ?>
+                            <input type="file" name="image" class="form-control">
+                            <small>(biarkan kosong jika tidak <?= $page == 'edit' ? 'diganti' : 'ada'?> )</small>
+                        </div>
+                        <div class="form-group">
                             <button class="btn btn-primary btn-flat" name="<?= $page; ?>" type="submit"><i class="fa fa-paper-plane"></i> Save</button>    
                             <button class="btn btn-secondary btn-flat" type="reset">Reset</button>    
                         </div>
-                    </form>
+                    <?= form_close(); ?>
                 </div>
             </div>
 		</div>
