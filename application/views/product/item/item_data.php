@@ -40,7 +40,10 @@
 					foreach($row->result() as $key => $data) { ?>
 					<tr>
 						<td style="width:5%;"><?= $no++?>.</td>
-						<td><?= $data->barcode?></td>
+						<td>
+							<?= $data->barcode?><br>
+							<a href="<?= site_url('item/barcode_qrcode/'.$data->item_id)?>" class="btn btn-default btn-xs btn-flat">Generate <i class="fa fa-barcode"></i></a>		
+						</td>
 						<td><?= $data->name?></td>
 						<td><?= $data->nama_kategori?></td>
 						<td><?= $data->nama_unit?></td>
