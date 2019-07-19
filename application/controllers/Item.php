@@ -88,20 +88,19 @@ class Item extends CI_Controller
 				if (@$_FILES['image']['name'] != null) {
 					if ($this->upload->do_upload('image')) {
 						$post['image'] = $this->upload->data('file_name');
-						$this->item_m->edit($post);
+						$this->item_m->add($post);
 						if ($this->db->affected_rows() > 0) {
 							$this->session->set_flashdata('success', 'Data berhasil disimpan');
 						}
 						redirect('item');
 					} else {
 						$error = $this->upload->display_errors();
-						$this->load->view('upload_form', $error);
 						$this->session->set_flashdata('error', $error);
 						redirect('item/add');
 					}
 				} else {
 					$post['image'] = null;
-					$this->item_m->edit($post);
+					$this->item_m->add($post);
 					if ($this->db->affected_rows() > 0) {
 						$this->session->set_flashdata('success', 'Data berhasil disimpan');
 					}
@@ -111,10 +110,11 @@ class Item extends CI_Controller
 		} else if (isset($_POST['edit'])) {
 			if ($this->item_m->check_barcode($post['barcode'], $post['id'])->num_rows > 0) {
 				$this->session->set_flashdata('error', "Barcode $post[barcode] sudah dipakai barang lain");
-				redirect('item/add', $post['id']);
+				redirect('item/edit', $post['id']);
 			} else {
 				if (@$_FILES['image']['name'] != null) {
 					if ($this->upload->do_upload('image')) {
+
 						$item = $this->item_m->get($post['id'])->row();
 						if ($item->image != null) { 
 							$target_file =  './uploads/product'.$item->image;

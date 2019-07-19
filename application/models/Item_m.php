@@ -58,7 +58,7 @@ class Item_m extends CI_Model
             'updated' => date('Y-m-d H:i:s')
         ];
 
-        if($post['image'] != null) {
+        if ($post['image'] != null) {
             $params['image'] = $post['image'];
         }
         $this->db->where('item_id', $post['id']);

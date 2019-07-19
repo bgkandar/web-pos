@@ -30,7 +30,6 @@
 						<th>Category</th>
 						<th>Unit</th>
 						<th>Price</th>
-						<th>Stock</th>
 						<th>Image</th>
 						<th>Aksi</th>
 					</tr>
@@ -48,7 +47,6 @@
 						<td><?= $data->nama_kategori?></td>
 						<td><?= $data->nama_unit?></td>
 						<td><?= $data->harga?></td>
-						<td><?= $data->stok?></td>
 						<td>
 							<?php if($data->image != null ) { ?>
 								<img src="<?= base_url('uploads/product/'. $data->image)?>" style="width:50px">
