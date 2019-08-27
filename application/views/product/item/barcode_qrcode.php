@@ -25,7 +25,9 @@
                 echo '<img src="data:image/png;base64,' . base64_encode($generator->getBarcode($row->barcode, $generator::TYPE_CODE_128)) . '" style="width:200px">';
                 ?>
                 <br>
-                <?= $row->barcode; ?>
+				<?= $row->barcode; ?>
+				<br>
+				<a href="<?= site_url('item/barcode_print/'.$row->item_id) ?>" target="_blank" class="btn btn-primary btn-flat mt-3"><i class="fa fa-print"></i> Print</a>
             </div>
         </div>
     </div>
