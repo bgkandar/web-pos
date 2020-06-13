@@ -13,10 +13,11 @@
 	<link rel="stylesheet" href="<?=base_url()?>assets/dist/css/AdminLTE.min.css">
 	<link rel="stylesheet" href="<?=base_url()?>assets/dist/css/skins/_all-skins.min.css">
 
-	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+	<!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic"> -->
 </head>
 
-<body class="hold-transition skin-blue sidebar-mini">
+<body class="hold-transition skin-blue sidebar-mini <?= $this->uri->segment(1) == 'sale' ? 'sidebar-collapse' : null ?>">
+
 	<div class="wrapper">
 
 		<header class="main-header">
@@ -149,7 +150,7 @@
 							<li <?= $this->uri->segment(1) == 'item' ? 'class="active"' : '' ?>><a href="<?= site_url('item')?>"><i class="fa fa-circle-o"></i> Items</a></li>
 						</ul>
 					</li>
-					<li class="treeview">
+					<li class="treeview <?= $this->uri->segment(1) == 'stock' || $this->uri->segment(1) == 'sale'  ? 'active' : ''?>">
 						<a href="#">
 							<i class="fa fa-shopping-cart"></i>
 							<span>Transaction</span>
@@ -158,9 +159,9 @@
 							</span>
 						</a>
 						<ul class="treeview-menu">
-							<li><a href=""><i class="fa fa-circle-o"></i> Sales</a></li>
-							<li><a href=""><i class="fa fa-circle-o"></i> Stock In</a></li>
-							<li><a href=""><i class="fa fa-circle-o"></i> Stock Out</a></li>
+							<li <?= $this->uri->segment(1) == 'sale' ? 'class="active"' : '' ?>><a href="<?= site_url('sale')?>"><i class="fa fa-circle-o"></i> Sales</a></li>
+							<li <?= $this->uri->segment(1) == 'stock' && $this->uri->segment(2) == 'in' ? 'class="active"' : '' ?>><a href="<?= site_url('stock/in')?>"><i class="fa fa-circle-o"></i> Stock In</a></li>
+							<li <?= $this->uri->segment(1) == 'stock' && $this->uri->segment(2) == 'out' ? 'class="active"' : '' ?>><a href="<?= site_url('stock/out')?>"><i class="fa fa-circle-o"></i> Stock Out</a></li>
 						</ul>
 					</li>
 					<li class="treeview">
@@ -186,6 +187,8 @@
 			<!-- /.sidebar -->
 		</aside>
 
+		<script src="<?=base_url()?>assets/bower_components/jquery/dist/jquery.min.js"></script>
+
 		<!-- Content Wrapper. Contains page content -->
 		<div class="content-wrapper">
 			<?php echo $contents ?>
@@ -202,7 +205,6 @@
 	<!-- ./wrapper -->
 
 	<!-- jQuery 3 -->
-	<script src="<?=base_url()?>assets/bower_components/jquery/dist/jquery.min.js"></script>
 	<script src="<?=base_url()?>assets/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 	<script src="<?=base_url()?>assets/bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
 	<script src="<?=base_url()?>assets/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>

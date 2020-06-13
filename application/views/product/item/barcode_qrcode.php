@@ -38,12 +38,15 @@
                 <h3 class="box-title">QR-Code Generator <i class="fa fa-qrcode"></i></h3>
             </div>
             <div class="box-body">
-                <?php $qrCode = new Endroid\QrCode\QrCode('123456');
+                <?php $qrCode = new Endroid\QrCode\QrCode($row->barcode);
                 // Save it to a file
-                $qrCode->writeFile('uploads/qr-code/item-'.$row->item_id.'.png'); ?>
-                <img src="<?=base_url('uploads/qr-code/item-'.$row->item_id.'.png')?>" style="width:200px">
+                $qrCode->writeFile('uploads/qr-code/item-'.$row->barcode.'.png'); ?>
+                <img src="<?=base_url('uploads/qr-code/item-'.$row->barcode.'.png')?>" style="width:200px">
+				<?= $row->barcode; ?>
+				<br>
+				<br>
+				<a href="<?= site_url('item/qrcode_print/'.$row->item_id) ?>" target="_blank" class="btn btn-primary btn-flat mt-3"><i class="fa fa-print"></i> Print</a>
             </div>
-            <?= $row->barcode; ?>
         </div>
     </div>
 </section>

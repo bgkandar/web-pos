@@ -30,4 +30,21 @@ Class Fungsi {
 		// Output the generated PDF to Browser
 		$dompdf->stream($filename, array('Attachment' => 0));
 	}
+
+	function count_items() {
+		$this->ci->load->model('item_m');
+		return $this->ci->item_m->get()->num_rows();
+	}
+	function count_suppliers() {
+		$this->ci->load->model('supplier_m');
+		return $this->ci->supplier_m->get()->num_rows();
+	}
+	function count_customers() {
+		$this->ci->load->model('customer_m');
+		return $this->ci->customer_m->get()->num_rows();
+	}
+	function count_users() {
+		$this->ci->load->model('user_m');
+		return $this->ci->user_m->get()->num_rows();
+	}
 }
